@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wella Glow | Мій кабінет</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --card: #111113;
+            --accent: #f43f5e;
+            --emerald: #10b981;
+            --gold: #fbbf24;
+        }
+
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg); 
+            color: #e2e8f0;
+            letter-spacing: -0.01em;
+        }
+
+        .glass-panel {
+            background: rgba(17, 17, 19, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neo-gradient {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+        }
+
+        .input-dark {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 12px;
+            outline: none;
+            width: 100%;
+        }
+
+        .status-badge {
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 5px;
+            letter-spacing: 0.05em;
+        }
+
+        i, span, p, h1, h2, h3, h4, label, button, input { font-style: normal !important; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1e1e21; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-16 lg:w-64 bg-black/50 border-r border-white/5 flex flex-col fixed h-full z-50">
+        <div class="p-6">
+            <h1 class="text-lg font-extrabold text-white tracking-tighter uppercase leading-none text-rose-500">Glow App</h1>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-6 mt-2 text-zinc-400">
+            <a href="#" class="flex items-center gap-3 p-3 text-white border-l-2 border-rose-500 bg-rose-500/5 font-bold transition">
+                <i class="fa-solid fa-user-heart text-sm text-rose-500"></i> <span class="hidden lg:block text-xs">Мій профіль</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-3 hover:text-white transition">
+                <i class="fa-solid fa-calendar-plus text-sm"></i> <span class="hidden lg:block text-xs">Записатись</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-3 hover:text-white transition">
+                <i class="fa-solid fa-gift text-sm"></i> <span class="hidden lg:block text-xs">Бонуси</span>
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-white/5 text-[9px] text-zinc-600 font-bold uppercase tracking-widest text-center">
+            Wella Glow Studio
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 ml-16 lg:ml-64 p-5 lg:p-10">
+        
+        <!-- HEADER -->
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight leading-none">Вітаємо, Вероніко! ✨</h2>
+                <p class="text-zinc-500 text-[11px] font-bold uppercase tracking-widest mt-2 leading-none">Твій день для краси сьогодні</p>
+            </div>
+            <button class="bg-white/5 p-2 rounded-xl text-zinc-400 hover:text-white transition">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT COLUMN: STATUS & BOOKING -->
+            <div class="lg:col-span-1 space-y-6">
+                
+                <!-- LOYALTY CARD -->
+                <div class="glass-panel p-6 rounded-[2rem] border-t-4 border-t-amber-500 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl"></div>
+                    <div class="flex justify-between items-start mb-10">
+                        <div>
+                            <p class="text-[9px] text-zinc-500 uppercase font-black tracking-widest leading-none">Статус лояльності</p>
+                            <h3 class="text-xl font-black text-amber-500 mt-2 uppercase tracking-tighter leading-none">Glow Gold Member</h3>
+                        </div>
+                        <i class="fa-solid fa-crown text-amber-500"></i>
+                    </div>
+                    
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-3xl font-black text-white leading-none">450 <span class="text-xs font-bold text-zinc-600 ml-1 italic-none">балів</span></p>
+                            <p class="text-[9px] text-zinc-500 mt-2 uppercase font-black leading-none">Знижка на послуги: 10%</p>
+                        </div>
+                        <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/5">
+                            <i class="fa-solid fa-qrcode text-zinc-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUICK BOOKING -->
+                <div class="glass-panel p-6 rounded-[2.5rem]">
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest mb-6 leading-none">Швидкий запис</h4>
+                    <div class="space-y-4">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[8px] text-zinc-600 uppercase font-black ml-1">Оберіть послугу</label>
+                            <select class="input-dark">
+                                <option>Складне фарбування</option>
+                                <option>Манікюр + Покриття</option>
+                                <option>Догляд за волоссям</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[8px] text-zinc-600 uppercase font-black ml-1">Бажана дата</label>
+                            <input type="date" class="input-dark">
+                        </div>
+                        <button class="neo-gradient w-full py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-rose-500/10 mt-2 transition active:scale-95">
+                            Забронювати візит
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: HISTORY & REVIEWS -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- UPCOMING APPOINTMENT -->
+                <div class="p-6 rounded-[2.5rem] bg-rose-500/5 border border-rose-500/20">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xs font-black text-rose-500 uppercase tracking-widest leading-none">Найближчий запис</h4>
+                        <span class="status-badge bg-rose-500 text-white">Підтверджено</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div class="flex gap-6 items-center">
+                            <div class="text-center">
+                                <p class="text-2xl font-black text-white leading-none tracking-tighter">22</p>
+                                <p class="text-[10px] text-zinc-500 font-bold uppercase mt-1 leading-none">Жовтня</p>
+                            </div>
+                            <div class="h-10 w-px bg-white/10"></div>
+                            <div>
+                                <p class="text-base font-bold text-white tracking-tight">Складне фарбування</p>
+                                <p class="text-[11px] text-zinc-500 font-medium">Майстер: Анна Король • 14:00</p>
+                            </div>
+                        </div>
+                        <button class="text-[9px] font-black text-zinc-400 uppercase tracking-widest hover:text-white transition">Перенести</button>
+                    </div>
+                </div>
+
+                <!-- HISTORY -->
+                <div class="glass-panel p-8 rounded-[2.5rem]">
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest mb-8 leading-none">Історія візитів</h4>
+                    <div class="space-y-6">
+                        <!-- Візит 1 -->
+                        <div class="flex justify-between items-center group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-xs text-zinc-500 uppercase leading-none">28.09</div>
+                                <div>
+                                    <p class="text-sm font-bold text-white tracking-tight leading-none">Манікюр + Дизайн</p>
+                                    <p class="text-[10px] text-zinc-500 mt-1 font-medium italic-none">Майстер: Марія П. • ₴1,200</p>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 border border-white/5 rounded-xl text-[9px] font-black uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-white/5 transition">Повторити</button>
+                        </div>
+                        <!-- Візит 2 -->
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-xs text-zinc-500 uppercase leading-none">12.08</div>
+                                <div>
+                                    <p class="text-sm font-bold text-white tracking-tight leading-none">Стрижка жіноча</p>
+                                    <p class="text-[10px] text-zinc-500 mt-1 font-medium">Майстер: Анна К. • ₴850</p>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 border border-white/5 rounded-xl text-[9px] font-black uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-white/5 transition">Повторити</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REVIEWS -->
+                <div class="glass-panel p-8 rounded-[2.5rem]">
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest mb-8 leading-none italic-none">Мої відгуки</h4>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-white/2 rounded-2xl border border-white/5 relative">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="text-amber-500 text-[10px]">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">на Анну К.</span>
+                            </div>
+                            <p class="text-xs text-zinc-300 font-medium leading-relaxed italic-none">«Анна справжня чарівниця! Фарбування виглядає неймовірно природньо, волосся стало навіть кращим за станом.»</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
