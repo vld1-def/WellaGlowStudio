@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wella Glow | Управління складом</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --card: #111113;
+            --accent: #f43f5e;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+        }
+
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg); 
+            color: #e2e8f0;
+            letter-spacing: -0.01em;
+        }
+
+        .glass-panel {
+            background: rgba(17, 17, 19, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neo-gradient {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+        }
+
+        .status-pill {
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 5px;
+            letter-spacing: 0.05em;
+        }
+
+        .stock-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 80px;
+        }
+
+        .input-dark {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .category-tab {
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .category-tab.active {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--accent);
+            border-color: rgba(244, 63, 94, 0.2);
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1e1e21; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-16 lg:w-64 bg-black/50 border-r border-white/5 flex flex-col fixed h-full z-50">
+        <div class="p-6">
+            <h1 class="text-lg font-extrabold text-white tracking-tighter uppercase leading-none">Wella Glow</h1>
+            <p class="text-[8px] text-rose-500 font-bold tracking-[0.4em] uppercase opacity-80 mt-1">studio</p>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-6 mt-2">
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Аналітика</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-house-chimney-window text-sm"></i> <span class="hidden lg:block text-xs">Дашборд</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Студія</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-calendar-day text-sm"></i> <span class="hidden lg:block text-xs">Записи</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 text-white border-l-2 border-rose-500 bg-rose-500/5 transition font-bold">
+                        <i class="fa-solid fa-boxes-stacked text-sm"></i> <span class="hidden lg:block text-xs font-bold">Склад</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-6 border-t border-white/5">
+            <div class="flex items-center gap-2">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=f43f5e&color=fff" class="w-8 h-8 rounded-lg">
+                <div class="hidden lg:block leading-none">
+                    <p class="text-[11px] font-bold text-white">Олена Адмін</p>
+                    <p class="text-[8px] text-rose-500 font-bold mt-1 uppercase">Власник</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 ml-16 lg:ml-64 p-5 lg:p-8">
+        
+        <!-- HEADER -->
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
+            <div>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight leading-none">Складський облік</h2>
+                <div class="flex items-center gap-2 mt-2 leading-none">
+                    <span class="text-[9px] text-zinc-500 font-black uppercase tracking-widest">Контроль ресурсів та залишків</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="glass-panel px-5 py-2.5 rounded-xl flex items-center gap-8">
+                    <div class="text-center">
+                        <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">Капіталізація складу</p>
+                        <p class="text-sm font-black text-white leading-none tracking-tighter">₴142,800</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">Потребує уваги</p>
+                        <p class="text-sm font-black text-rose-500 leading-none tracking-tighter">12 позицій</p>
+                    </div>
+                </div>
+                <button class="neo-gradient px-5 py-3 rounded-xl text-white shadow-lg shadow-rose-500/20 text-[10px] font-black uppercase tracking-widest transition hover:opacity-90">
+                    + Додати товар
+                </button>
+            </div>
+        </header>
+
+        <!-- КАТЕГОРІЇ ТА ПОШУК -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-2 bg-white/2 p-1 rounded-xl border border-white/5">
+                <button class="category-tab active">Всі товари</button>
+                <button class="category-tab text-zinc-500">Фарби</button>
+                <button class="category-tab text-zinc-500">Догляд</button>
+                <button class="category-tab text-zinc-500">Технічні</button>
+                <button class="category-tab text-zinc-500">Розхідники</button>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-3 top-2.5 text-zinc-600 text-[10px]"></i>
+                    <input type="text" placeholder="Пошук по артикулу чи назві..." class="input-dark pl-8 w-64">
+                </div>
+                <button class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl transition text-zinc-400">
+                    <i class="fa-solid fa-filter text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ТАБЛИЦЯ СКЛАДУ -->
+        <div class="glass-panel rounded-[2rem] overflow-hidden">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="text-[9px] text-zinc-500 uppercase font-black border-b border-white/5 bg-white/2 tracking-widest">
+                        <th class="p-5">Товар / Артикул</th>
+                        <th class="p-5">Категорія</th>
+                        <th class="p-5">Залишок</th>
+                        <th class="p-5">Статус</th>
+                        <th class="p-5">Од. виміру</th>
+                        <th class="p-5">Собівартість</th>
+                        <th class="p-5">Загальна сума</th>
+                        <th class="p-5 text-right">Дії</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5 font-medium">
+                    
+                    <!-- ТОВАР 1 (КРИТИЧНО) -->
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-rose-500/10 rounded-lg flex items-center justify-center text-rose-500 font-black text-[10px]">W</div>
+                                <div>
+                                    <p class="font-bold text-white leading-none">Wella Koleston 7/0</p>
+                                    <p class="text-[9px] text-zinc-600 mt-1 uppercase font-bold tracking-tighter">Art: WL-700-K</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-5 text-zinc-500 text-[10px] font-bold uppercase tracking-tight">Фарби</td>
+                        <td class="p-5">
+                            <div class="flex flex-col gap-1.5">
+                                <span class="font-black text-rose-500 leading-none">1 шт</span>
+                                <div class="stock-bar"><div class="h-full bg-rose-500" style="width: 10%"></div></div>
+                            </div>
+                        </td>
+                        <td class="p-5"><span class="status-pill bg-rose-500/10 text-rose-500">Критично</span></td>
+                        <td class="p-5 text-zinc-400 text-[10px] font-bold">шт.</td>
+                        <td class="p-5 font-bold text-zinc-300">₴420</td>
+                        <td class="p-5 font-black text-white italic-none">₴420</td>
+                        <td class="p-5 text-right">
+                            <button class="px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white transition rounded-lg text-[9px] font-black uppercase tracking-widest">Замовити</button>
+                        </td>
+                    </tr>
+
+                    <!-- ТОВАР 2 (МАЛО) -->
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-amber-500/10 rounded-lg flex items-center justify-center text-amber-500 font-black text-[10px]">O</div>
+                                <div>
+                                    <p class="font-bold text-white leading-none">Окислювач Wella 6%</p>
+                                    <p class="text-[9px] text-zinc-600 mt-1 uppercase font-bold tracking-tighter">Art: WL-OX6</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-5 text-zinc-500 text-[10px] font-bold uppercase tracking-tight">Технічні</td>
+                        <td class="p-5">
+                            <div class="flex flex-col gap-1.5">
+                                <span class="font-black text-amber-500 leading-none">450 мл</span>
+                                <div class="stock-bar"><div class="h-full bg-amber-500" style="width: 45%"></div></div>
+                            </div>
+                        </td>
+                        <td class="p-5"><span class="status-pill bg-amber-500/10 text-amber-500">Мало</span></td>
+                        <td class="p-5 text-zinc-400 text-[10px] font-bold">мл.</td>
+                        <td class="p-5 font-bold text-zinc-300">₴0.8 / мл</td>
+                        <td class="p-5 font-black text-white italic-none">₴360</td>
+                        <td class="p-5 text-right">
+                            <button class="text-zinc-600 hover:text-white transition px-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </td>
+                    </tr>
+
+                    <!-- ТОВАР 3 (НОРМА) -->
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-500 font-black text-[10px]">S</div>
+                                <div>
+                                    <p class="font-bold text-white leading-none">Шампунь Wella Brilliance</p>
+                                    <p class="text-[9px] text-zinc-600 mt-1 uppercase font-bold tracking-tighter">Art: WL-SH-1L</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-5 text-zinc-500 text-[10px] font-bold uppercase tracking-tight">Догляд</td>
+                        <td class="p-5">
+                            <div class="flex flex-col gap-1.5">
+                                <span class="font-black text-emerald-500 leading-none">2500 мл</span>
+                                <div class="stock-bar"><div class="h-full bg-emerald-500" style="width: 85%"></div></div>
+                            </div>
+                        </td>
+                        <td class="p-5"><span class="status-pill bg-emerald-500/10 text-emerald-500">В нормі</span></td>
+                        <td class="p-5 text-zinc-400 text-[10px] font-bold">мл.</td>
+                        <td class="p-5 font-bold text-zinc-300">₴1.2 / мл</td>
+                        <td class="p-5 font-black text-white italic-none">₴3,000</td>
+                        <td class="p-5 text-right">
+                            <button class="text-zinc-600 hover:text-white transition px-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+            <!-- ПАГІНАЦІЯ -->
+            <div class="p-4 flex justify-between items-center bg-black/20 border-t border-white/5">
+                <div class="flex items-center gap-4">
+                    <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest">Всього товарів: 124</p>
+                    <div class="h-3 w-px bg-white/5"></div>
+                    <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest italic-none">Показано: 1 — 15</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="p-2 bg-white/5 rounded-lg text-zinc-500 hover:text-white transition">
+                        <i class="fa-solid fa-chevron-left text-[9px]"></i>
+                    </button>
+                    <button class="p-2 bg-white/5 rounded-lg text-zinc-500 hover:text-white transition">
+                        <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ІСТОРІЯ СПИСАНЬ ТА ЗАМОВЛЕНЬ -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+            <div class="glass-panel p-6 rounded-[2rem]">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-6">Останні списання</h4>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-white/2 rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <div class="text-[10px] font-bold text-zinc-500 tracking-tighter uppercase leading-none">12:15</div>
+                            <span class="text-xs font-bold text-zinc-300 tracking-tight">Анна К. використала 60г WL 7/0</span>
+                        </div>
+                        <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-widest italic-none">Авто-списання</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white/2 rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <div class="text-[10px] font-bold text-zinc-500 tracking-tighter uppercase leading-none">09:40</div>
+                            <span class="text-xs font-bold text-zinc-300 tracking-tight">Марія П. взяла Окислювач 6%</span>
+                        </div>
+                        <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-widest italic-none">Ручне списання</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-[2rem]">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-6 italic-none">Список на закупку</h4>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" checked class="accent-rose-500">
+                            <span class="text-xs font-bold text-white tracking-tight">Фарби серії 7.0 та 8.0</span>
+                        </div>
+                        <span class="text-[10px] font-black text-rose-500 italic-none tracking-widest uppercase">Терміново</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="accent-rose-500">
+                            <span class="text-xs font-bold text-zinc-400 tracking-tight">Паперові рушники (5 уп)</span>
+                        </div>
+                        <span class="text-[10px] font-bold text-zinc-600 italic-none tracking-widest uppercase">Планово</span>
+                    </div>
+                </div>
+                <button class="w-full mt-6 py-3 bg-white/5 hover:bg-emerald-500 transition-all rounded-xl text-[8px] font-black uppercase tracking-widest border border-white/5">Сформувати замовлення постачальнику</button>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
