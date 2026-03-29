@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wella Glow | Фінансова аналітика</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --card: #111113;
+            --accent: #f43f5e;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+            --blue: #3b82f6;
+        }
+
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg); 
+            color: #e2e8f0;
+            letter-spacing: -0.01em;
+        }
+
+        .glass-panel {
+            background: rgba(17, 17, 19, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neo-gradient {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+        }
+
+        .input-dark {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1e1e21; border-radius: 10px; }
+
+        /* Видалення курсиву з усіх стандартних елементів */
+        cite, dfn, em, i, var, address { font-style: normal; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-16 lg:w-64 bg-black/50 border-r border-white/5 flex flex-col fixed h-full z-50">
+        <div class="p-6">
+            <h1 class="text-lg font-extrabold text-white tracking-tighter uppercase leading-none">Wella Glow</h1>
+            <p class="text-[8px] text-rose-500 font-bold tracking-[0.4em] uppercase opacity-80 mt-1">studio</p>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-6 mt-2">
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Аналітика</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-house-chimney-window text-sm"></i> <span class="hidden lg:block text-xs">Дашборд</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 text-white border-l-2 border-rose-500 bg-rose-500/5 transition font-bold">
+                        <i class="fa-solid fa-wallet text-sm text-rose-500"></i> <span class="hidden lg:block text-xs font-bold">Фінанси</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Студія</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-calendar-day text-sm"></i> <span class="hidden lg:block text-xs">Записи</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-boxes-stacked text-sm"></i> <span class="hidden lg:block text-xs">Склад</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-6 border-t border-white/5">
+            <div class="flex items-center gap-2">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=f43f5e&color=fff" class="w-8 h-8 rounded-lg">
+                <div class="hidden lg:block leading-none">
+                    <p class="text-[11px] font-bold text-white">Олена Адмін</p>
+                    <p class="text-[8px] text-rose-500 font-bold mt-1 uppercase">Власник</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 ml-16 lg:ml-64 p-5 lg:p-8">
+        
+        <!-- HEADER -->
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
+            <div>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight leading-none">Фінансова аналітика</h2>
+                <div class="flex items-center gap-2 mt-2 leading-none">
+                    <span class="text-[9px] text-zinc-500 font-black uppercase tracking-widest">Звітний період:</span>
+                    <span class="text-[9px] text-rose-500 font-black uppercase tracking-widest">Березень 2026</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="glass-panel px-5 py-2.5 rounded-xl flex items-center gap-8">
+                    <div class="text-center">
+                        <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">Готівка в касі</p>
+                        <p class="text-sm font-black text-white leading-none tracking-tighter">₴12,400</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">На розрахунковому</p>
+                        <p class="text-sm font-black text-emerald-400 leading-none tracking-tighter">₴156,000</p>
+                    </div>
+                </div>
+                <button class="neo-gradient px-5 py-3 rounded-xl text-white shadow-lg shadow-rose-500/20 text-[10px] font-black uppercase tracking-widest transition hover:opacity-90">
+                    Експорт звіту
+                </button>
+            </div>
+        </header>
+
+        <!-- KPI CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Загальна виручка</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter">₴248,500</h3>
+                <p class="text-[9px] text-emerald-500 mt-2 font-bold uppercase">+12% до плану</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Всього витрат</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter">₴112,400</h3>
+                <p class="text-[9px] text-rose-500 mt-2 font-bold uppercase">ЗП, Оренда, Матеріали</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl border-l-4 border-emerald-500">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2 text-emerald-500">Чистий прибуток</p>
+                <h3 class="text-3xl font-black text-white tracking-tighter">₴136,100</h3>
+                <p class="text-[9px] text-zinc-500 mt-2 font-bold uppercase tracking-tight">Після всіх відрахувань</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Рентабельність</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter">54.8%</h3>
+                <div class="mt-3 h-1 w-full bg-zinc-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500" style="width: 55%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHARTS SECTION -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Головний графік прибутку -->
+            <div class="lg:col-span-2 glass-panel p-8 rounded-[2.5rem]">
+                <div class="flex justify-between items-center mb-8">
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest">Грошові потоки (Дохід vs Витрати)</h4>
+                </div>
+                <div class="h-80">
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Структура витрат (Donut) -->
+            <div class="glass-panel p-8 rounded-[2.5rem]">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-8 text-center">Куди йдуть гроші</h4>
+                <div class="h-64 relative">
+                    <canvas id="expenseDonut"></canvas>
+                </div>
+                <div class="mt-6 space-y-2">
+                    <div class="flex justify-between text-[10px] uppercase font-bold px-2">
+                        <span class="text-rose-500">Зарплати</span>
+                        <span class="text-white">45%</span>
+                    </div>
+                    <div class="flex justify-between text-[10px] uppercase font-bold px-2">
+                        <span class="text-blue-500">Оренда/Комунальні</span>
+                        <span class="text-white">25%</span>
+                    </div>
+                    <div class="flex justify-between text-[10px] uppercase font-bold px-2">
+                        <span class="text-amber-500">Матеріали</span>
+                        <span class="text-white">20%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ТРАНЗАКЦІЇ -->
+        <div class="glass-panel rounded-[2rem] overflow-hidden">
+            <div class="p-6 border-b border-white/5 flex justify-between items-center">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest leading-none">Реєстр транзакцій</h4>
+                <button class="text-[9px] text-zinc-500 font-black uppercase hover:text-white transition tracking-widest">Переглянути всі</button>
+            </div>
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[9px] text-zinc-500 uppercase font-black border-b border-white/5 bg-white/2">
+                        <th class="p-5">Дата</th>
+                        <th class="p-5">Категорія</th>
+                        <th class="p-5">Коментар</th>
+                        <th class="p-5">Метод</th>
+                        <th class="p-5 text-right">Сума</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5 font-medium">
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5 text-zinc-500 text-[10px] font-bold">29.03.2026</td>
+                        <td class="p-5"><span class="text-[9px] bg-rose-500/10 text-rose-500 px-2 py-1 rounded-md font-black uppercase">Виплата ЗП</span></td>
+                        <td class="p-5 text-xs text-zinc-300 font-bold">Виплата основної частини (Анна Король)</td>
+                        <td class="p-5 text-[9px] text-zinc-600 font-black uppercase tracking-widest">Картка</td>
+                        <td class="p-5 text-right font-black text-rose-500 italic-none tracking-tight">- ₴12,500</td>
+                    </tr>
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5 text-zinc-500 text-[10px] font-bold">28.03.2026</td>
+                        <td class="p-5"><span class="text-[9px] bg-amber-500/10 text-amber-500 px-2 py-1 rounded-md font-black uppercase">Склад</span></td>
+                        <td class="p-5 text-xs text-zinc-300 font-bold">Закупівля партії Wella Koleston (15 шт)</td>
+                        <td class="p-5 text-[9px] text-zinc-600 font-black uppercase tracking-widest">Рахунок</td>
+                        <td class="p-5 text-right font-black text-rose-500 tracking-tight">- ₴6,300</td>
+                    </tr>
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5 text-zinc-500 text-[10px] font-bold">28.03.2026</td>
+                        <td class="p-5"><span class="text-[9px] bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded-md font-black uppercase">Виручка</span></td>
+                        <td class="p-5 text-xs text-zinc-300 font-bold">Денна виручка (Всі майстри)</td>
+                        <td class="p-5 text-[9px] text-zinc-600 font-black uppercase tracking-widest">Каса</td>
+                        <td class="p-5 text-right font-black text-emerald-400 tracking-tight">+ ₴24,800</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script>
+        // ГРАФІК ПОТОКІВ
+        const ctxF = document.getElementById('financeChart').getContext('2d');
+        new Chart(ctxF, {
+            type: 'line',
+            data: {
+                labels: ['01', '05', '10', '15', '20', '25', '30'],
+                datasets: [
+                    {
+                        label: 'Дохід',
+                        data: [15000, 28000, 22000, 45000, 38000, 52000, 48000],
+                        borderColor: '#f43f5e',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Витрати',
+                        data: [10000, 12000, 15000, 18000, 14000, 22000, 19000],
+                        borderColor: '#52525b',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(255, 255, 255, 0.03)', drawBorder: false }, ticks: { color: '#52525b', font: { size: 9 } } },
+                    x: { grid: { display: false }, ticks: { color: '#52525b', font: { size: 9 } } }
+                }
+            }
+        });
+
+        // ПИРІГ ВИТРАТ
+        const ctxD = document.getElementById('expenseDonut').getContext('2d');
+        new Chart(ctxD, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#f43f5e', '#3b82f6', '#f59e0b', '#1e1e21'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                cutout: '80%',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } }
+            }
+        });
+    </script>
+</body>
+</html>
