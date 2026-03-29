@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wella Glow | Панель управління</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --card: #111113;
+            --accent: #f43f5e;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+        }
+
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg); 
+            color: #e2e8f0;
+            letter-spacing: -0.01em;
+        }
+
+        .glass-panel {
+            background: rgba(17, 17, 19, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neo-gradient {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+        }
+
+        /* Таймлайн візитів */
+        .timeline-line {
+            position: absolute;
+            left: 6px;
+            top: 4px;
+            bottom: 4px;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .status-dot.active {
+            background-color: #ec4899;
+            box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+        }
+
+        .status-dot.waiting {
+            background-color: #2d3748;
+        }
+
+        .master-badge {
+            background: rgba(255, 255, 255, 0.03);
+            color: #4a5568;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1e1e21; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-16 lg:w-64 bg-black/50 border-r border-white/5 flex flex-col fixed h-full z-50">
+        <div class="p-6">
+            <h1 class="text-lg font-extrabold text-white tracking-tighter uppercase leading-none">Wella Glow</h1>
+            <p class="text-[8px] text-rose-500 font-bold tracking-[0.4em] uppercase opacity-80 mt-1">studio</p>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-6 mt-2">
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Аналітика</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 text-white border-l-2 border-rose-500 bg-rose-500/5 transition font-bold">
+                        <i class="fa-solid fa-house-chimney-window text-sm"></i> <span class="hidden lg:block text-xs font-bold">Дашборд</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-chart-line text-sm"></i> <span class="hidden lg:block text-xs">Фінанси</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Студія</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="./list.html" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-calendar-day text-sm"></i> <span class="hidden lg:block text-xs">Записи</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-boxes-stacked text-sm"></i> <span class="hidden lg:block text-xs">Склад</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-6 border-t border-white/5">
+            <div class="flex items-center gap-2">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=f43f5e&color=fff" class="w-8 h-8 rounded-lg shadow-xl">
+                <div class="hidden lg:block leading-none">
+                    <p class="text-[11px] font-bold text-white">Олена Адмін</p>
+                    <p class="text-[8px] text-rose-500 font-bold mt-1 uppercase">Власник</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 ml-16 lg:ml-64 p-5 lg:p-8">
+        
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight leading-none">Вітаю, Олено!</h2>
+                <p class="text-zinc-500 text-xs mt-2 font-medium uppercase tracking-wider">Аналітика на сьогодні</p>
+            </div>
+
+            <button class="neo-gradient px-6 py-2.5 rounded-xl text-white shadow-lg shadow-rose-500/20 text-[10px] font-black uppercase tracking-widest transition hover:opacity-90">
+                + Новий запис
+            </button>
+        </header>
+
+        <!-- KPI КАРТКИ -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Прибуток</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter leading-none">₴184,200</h3>
+                <p class="text-[9px] text-zinc-500 mt-2 font-bold uppercase">Ціль: <span class="text-rose-400">₴215,000</span></p>
+                <div class="mt-3 h-1 w-full bg-zinc-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-rose-500" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Нові клієнти</p>
+                <div class="flex items-center justify-between">
+                    <h3 class="text-2xl font-black text-white tracking-tighter leading-none">56</h3>
+                    <div class="text-right leading-none">
+                        <span class="text-emerald-400 text-[10px] font-black">+18%</span>
+                        <p class="text-[7px] text-zinc-600 uppercase font-bold">vs мин. міс.</p>
+                    </div>
+                </div>
+                <p class="text-[9px] text-zinc-500 mt-3 font-bold uppercase">Ріст клієнтської бази</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Записи місяця</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter leading-none">384</h3>
+                <p class="text-[9px] text-zinc-500 mt-2 font-bold uppercase">Ціль: <span class="text-rose-400">500 записів</span></p>
+                <div class="mt-3 flex gap-0.5">
+                    <div class="h-1 flex-1 bg-rose-500 rounded-full"></div>
+                    <div class="h-1 flex-1 bg-rose-500 rounded-full"></div>
+                    <div class="h-1 flex-1 bg-rose-500 rounded-full"></div>
+                    <div class="h-1 flex-1 bg-zinc-800 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-2">Середній чек</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter leading-none">₴1,850</h3>
+                <p class="text-[9px] text-emerald-500 font-bold uppercase mt-3 tracking-tighter leading-none">Ріст +5% до плану</p>
+            </div>
+        </div>
+
+        <!-- ГРАФІК ТА ТАЙМЛАЙН -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            
+            <div class="lg:col-span-2 glass-panel p-6 rounded-3xl">
+                <h4 class="text-xs font-extrabold text-white uppercase tracking-widest mb-6">Аналітика доходів</h4>
+                <div class="h-72">
+                    <canvas id="profitChart"></canvas>
+                </div>
+            </div>
+
+            <!-- ВІЗИТИ СЬОГОДНІ (4 ЗАПИСИ) -->
+            <div class="glass-panel p-6 rounded-3xl">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-8 leading-none">Візити сьогодні</h4>
+                <div class="relative space-y-7">
+                    <div class="timeline-line"></div>
+
+                    <!-- 1 (100%) -->
+                    <div class="relative flex justify-between items-start opacity-100 transition hover:translate-x-1">
+                        <div class="flex gap-4">
+                            <div class="mt-1.5"><div class="status-dot active"></div></div>
+                            <div>
+                                <p class="text-sm font-bold text-white leading-none tracking-tight">Вероніка К.</p>
+                                <p class="text-[10px] text-zinc-500 mt-2 font-medium">Догляд + Укладка</p>
+                                <p class="text-[9px] font-bold text-rose-500 mt-2 uppercase tracking-tighter">14:00 - 15:30</p>
+                            </div>
+                        </div>
+                        <span class="master-badge">Анна К.</span>
+                    </div>
+
+                    <!-- 2 (75%) -->
+                    <div class="relative flex justify-between items-start opacity-75 transition hover:translate-x-1">
+                        <div class="flex gap-4">
+                            <div class="mt-1.5"><div class="status-dot waiting"></div></div>
+                            <div>
+                                <p class="text-sm font-bold text-white leading-none tracking-tight">Тетяна М.</p>
+                                <p class="text-[10px] text-zinc-500 mt-2 font-medium">Манікюр + Дизайн</p>
+                                <p class="text-[9px] font-bold text-zinc-500 mt-2 uppercase tracking-tighter">16:00 - 17:00</p>
+                            </div>
+                        </div>
+                        <span class="master-badge">Катя М.</span>
+                    </div>
+
+                    <!-- 3 (50%) -->
+                    <div class="relative flex justify-between items-start opacity-50 transition hover:translate-x-1">
+                        <div class="flex gap-4">
+                            <div class="mt-1.5"><div class="status-dot waiting"></div></div>
+                            <div>
+                                <p class="text-sm font-bold text-white leading-none tracking-tight">Оксана П.</p>
+                                <p class="text-[10px] text-zinc-500 mt-2 font-medium">Корекція брів</p>
+                            </div>
+                        </div>
+                        <span class="master-badge">Яна В.</span>
+                    </div>
+
+                    <!-- 4 (15%) -->
+                    <div class="relative flex justify-between items-start opacity-15">
+                        <div class="flex gap-4">
+                            <div class="mt-1.5"><div class="status-dot waiting"></div></div>
+                            <div>
+                                <p class="text-sm font-bold text-white leading-none tracking-tight">Карина В.</p>
+                                <p class="text-[10px] text-zinc-600 mt-2 font-medium">Стрижка кінчиків</p>
+                            </div>
+                        </div>
+                        <span class="master-badge opacity-40">Анна К.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ТАБЛИЦЯ ТА СКЛАД -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <div class="lg:col-span-2 glass-panel p-6 rounded-3xl">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4">Ефективність майстрів</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-[9px] text-zinc-500 uppercase font-black border-b border-white/5">
+                                <th class="pb-3">Майстер</th>
+                                <th class="pb-3">Виконано записів</th>
+                                <th class="pb-3">Виручка</th>
+                                <th class="pb-3 text-right">Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr class="group hover:bg-white/5 transition">
+                                <td class="py-3 flex items-center gap-3">
+                                    <div class="w-6 h-6 rounded-lg bg-rose-500/10 text-rose-500 flex items-center justify-center font-bold text-[9px]">АК</div>
+                                    <span class="text-xs font-bold text-zinc-300">Анна Король</span>
+                                </td>
+                                <td class="py-3 font-bold text-xs text-emerald-400">84 записи</td>
+                                <td class="py-3 text-xs font-bold text-white tracking-tight">₴48,400</td>
+                                <td class="py-3 text-right">
+                                    <span class="px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-md text-[8px] font-black uppercase">У зміні</span>
+                                </td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition">
+                                <td class="py-3 flex items-center gap-3">
+                                    <div class="w-6 h-6 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold text-[9px]">МП</div>
+                                    <span class="text-xs font-bold text-zinc-300">Марія Пляс</span>
+                                </td>
+                                <td class="py-3 font-bold text-xs text-amber-400">52 записи</td>
+                                <td class="py-3 text-xs font-bold text-white tracking-tight">₴22,100</td>
+                                <td class="py-3 text-right">
+                                    <span class="px-2 py-1 bg-zinc-800 text-zinc-500 rounded-md text-[8px] font-black uppercase">Вихідний</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-3xl">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4 leading-none">Стан складу</h4>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-zinc-300 tracking-tight">Wella Color 7/0</span>
+                        <div class="h-1 w-16 bg-zinc-900 rounded-full overflow-hidden">
+                            <div class="h-full bg-emerald-500" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-zinc-300 tracking-tight">Окислювач 6%</span>
+                        <div class="h-1 w-16 bg-zinc-900 rounded-full overflow-hidden">
+                            <div class="h-full bg-amber-500" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-zinc-300 tracking-tight">Шампунь-догляд</span>
+                        <div class="h-1 w-16 bg-zinc-900 rounded-full overflow-hidden">
+                            <div class="h-full bg-rose-500 animate-pulse" style="width: 12%"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full mt-8 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-[8px] font-black uppercase tracking-widest border border-white/5 transition">Замовити звіт</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const ctx = document.getElementById('profitChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(244, 63, 94, 0.3)');
+        gradient.addColorStop(1, 'rgba(244, 63, 94, 0)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Пн', 'Вв', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'],
+                datasets: [{
+                    data: [12000, 18500, 14000, 21000, 28000, 45000, 39000],
+                    borderColor: '#f43f5e',
+                    borderWidth: 3,
+                    fill: true,
+                    backgroundColor: gradient,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(255, 255, 255, 0.03)', drawBorder: false }, ticks: { color: '#52525b', font: { size: 9 } } },
+                    x: { grid: { display: false }, ticks: { color: '#52525b', font: { size: 9 } } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
