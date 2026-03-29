@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wella Glow | Управління персоналом</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;600;700;800&display=swap');
+        
+        :root {
+            --bg: #050505;
+            --card: #111113;
+            --accent: #f43f5e;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+        }
+
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg); 
+            color: #e2e8f0;
+            letter-spacing: -0.01em;
+        }
+
+        .glass-panel {
+            background: rgba(17, 17, 19, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neo-gradient {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Видалення курсиву */
+        i, span, p, h1, h2, h3, h4, td, th { font-style: normal !important; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1e1e21; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-16 lg:w-64 bg-black/50 border-r border-white/5 flex flex-col fixed h-full z-50">
+        <div class="p-6">
+            <h1 class="text-lg font-extrabold text-white tracking-tighter uppercase leading-none">Wella Glow</h1>
+            <p class="text-[8px] text-rose-500 font-bold tracking-[0.4em] uppercase opacity-80 mt-1">studio</p>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-6 mt-2">
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Аналітика</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-house-chimney-window text-sm"></i> <span class="hidden lg:block text-xs">Дашборд</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <p class="text-[9px] text-zinc-600 uppercase font-black tracking-widest mb-3 ml-2">Студія</p>
+                <div class="space-y-1 text-zinc-400">
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-calendar-day text-sm"></i> <span class="hidden lg:block text-xs">Записи</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 text-white border-l-2 border-rose-500 bg-rose-500/5 transition font-bold">
+                        <i class="fa-solid fa-users-gear text-sm text-rose-500"></i> <span class="hidden lg:block text-xs font-bold">Персонал</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 p-2 hover:text-white transition">
+                        <i class="fa-solid fa-boxes-stacked text-sm"></i> <span class="hidden lg:block text-xs">Склад</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-6 border-t border-white/5">
+            <div class="flex items-center gap-2">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=f43f5e&color=fff" class="w-8 h-8 rounded-lg">
+                <div class="hidden lg:block leading-none">
+                    <p class="text-[11px] font-bold text-white">Олена Адмін</p>
+                    <p class="text-[8px] text-rose-500 font-bold mt-1 uppercase">Власник</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 ml-16 lg:ml-64 p-5 lg:p-8">
+        
+        <!-- HEADER -->
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 gap-6">
+            <div>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight leading-none">Команда студії</h2>
+                <div class="flex items-center gap-2 mt-2 leading-none">
+                    <span class="text-[9px] text-zinc-500 font-black uppercase tracking-widest text-emerald-500">8 майстрів активні</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button class="btn-outline px-5 py-3 rounded-xl text-zinc-400 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive"></i> Архів та кандидати
+                </button>
+                <button class="neo-gradient px-5 py-3 rounded-xl text-white shadow-lg shadow-rose-500/20 text-[10px] font-black uppercase tracking-widest transition hover:opacity-90">
+                    + Додати працівника
+                </button>
+            </div>
+        </header>
+
+        <!-- KPI STAFF -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="glass-panel p-6 rounded-3xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-3">Загальний фонд (40%)</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter leading-none">₴98,400</h3>
+                <p class="text-[9px] text-zinc-500 mt-3 font-bold uppercase">Сума до виплати за березень</p>
+            </div>
+            <div class="glass-panel p-6 rounded-3xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-3">Ефективність команди</p>
+                <h3 class="text-2xl font-black text-white tracking-tighter leading-none">8.4 / 10</h3>
+                <div class="mt-4 h-1 w-full bg-zinc-900 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500" style="width: 84%"></div>
+                </div>
+            </div>
+            <div class="glass-panel p-6 rounded-3xl">
+                <p class="text-zinc-500 text-[9px] uppercase font-black tracking-widest mb-3">Середній рейтинг</p>
+                <div class="flex items-center gap-3">
+                    <h3 class="text-2xl font-black text-white tracking-tighter leading-none">4.92</h3>
+                    <div class="text-amber-500 text-xs">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+                <p class="text-[9px] text-zinc-500 mt-3 font-bold uppercase tracking-widest">На основі 420 відгуків</p>
+            </div>
+        </div>
+
+        <!-- STAFF TABLE -->
+        <div class="glass-panel rounded-[2.5rem] overflow-hidden">
+            <div class="p-6 border-b border-white/5 bg-white/2 flex justify-between items-center">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest">Активний склад</h4>
+                <div class="flex gap-4">
+                    <input type="text" placeholder="Пошук майстра..." class="bg-black/20 border border-white/10 rounded-lg px-3 py-1.5 text-[10px] focus:outline-none focus:border-rose-500 transition">
+                </div>
+            </div>
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-[9px] text-zinc-500 uppercase font-black border-b border-white/5 bg-white/2 tracking-widest">
+                        <th class="p-5 font-black">Співробітник / Посада</th>
+                        <th class="p-5 font-black text-center">Стаж (днів)</th>
+                        <th class="p-5 font-black text-center">Записи</th>
+                        <th class="p-5 font-black">Виручка студії</th>
+                        <th class="p-5 font-black text-rose-500">Частка (40%)</th>
+                        <th class="p-5 font-black">Рейтинг</th>
+                        <th class="p-5 text-right font-black">Дії</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    
+                    <!-- Працівник 1 -->
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Anna+K&background=f43f5e&color=fff" class="w-8 h-8 rounded-lg shadow-lg">
+                                <div>
+                                    <p class="text-xs font-bold text-white leading-none tracking-tight">Анна Король</p>
+                                    <p class="text-[9px] text-zinc-500 mt-1 uppercase font-bold tracking-tighter">Топ-Стиліст</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-5 text-center font-bold text-xs text-zinc-400">412</td>
+                        <td class="p-5 text-center font-black text-white tracking-tighter">156</td>
+                        <td class="p-5 font-black text-white text-sm tracking-tight">₴124,500</td>
+                        <td class="p-5">
+                            <div class="flex flex-col">
+                                <span class="text-sm font-black text-rose-500 leading-none tracking-tight">₴49,800</span>
+                                <span class="text-[8px] text-zinc-600 font-bold uppercase mt-1 leading-none">До виплати</span>
+                            </div>
+                        </td>
+                        <td class="p-5">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs font-black text-white">4.9</span>
+                                <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-tighter">(124 відгуки)</span>
+                            </div>
+                        </td>
+                        <td class="p-5 text-right">
+                            <button class="text-zinc-600 hover:text-white transition px-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </td>
+                    </tr>
+
+                    <!-- Працівник 2 -->
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=Inna+V&background=3b82f6&color=fff" class="w-8 h-8 rounded-lg shadow-lg">
+                                <div>
+                                    <p class="text-xs font-bold text-white leading-none tracking-tight">Інна Власова</p>
+                                    <p class="text-[9px] text-zinc-500 mt-1 uppercase font-bold tracking-tighter">Майстер-Колорист</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-5 text-center font-bold text-xs text-zinc-400">186</td>
+                        <td class="p-5 text-center font-black text-white tracking-tighter">94</td>
+                        <td class="p-5 font-black text-white text-sm tracking-tight">₴82,300</td>
+                        <td class="p-5">
+                            <span class="text-sm font-black text-rose-500 leading-none tracking-tight">₴32,920</span>
+                        </td>
+                        <td class="p-5">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs font-black text-white">5.0</span>
+                                <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-tighter">(86 відгуків)</span>
+                            </div>
+                        </td>
+                        <td class="p-5 text-right">
+                            <button class="text-zinc-600 hover:text-white transition px-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </td>
+                    </tr>
+
+                    <!-- Працівник 3 (Випробувальний термін) -->
+                    <tr class="hover:bg-white/2 transition group">
+                        <td class="p-5">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name=M+R&background=10b981&color=fff" class="w-8 h-8 rounded-lg shadow-lg">
+                                <div>
+                                    <p class="text-xs font-bold text-white leading-none tracking-tight">Марія Різник</p>
+                                    <p class="text-[9px] text-emerald-500 mt-1 uppercase font-black tracking-tighter">Nail Artist (Trial)</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-5 text-center font-bold text-xs text-zinc-400">12</td>
+                        <td class="p-5 text-center font-black text-white tracking-tighter">24</td>
+                        <td class="p-5 font-black text-white text-sm tracking-tight">₴18,600</td>
+                        <td class="p-5">
+                            <span class="text-sm font-black text-rose-500 leading-none tracking-tight">₴7,440</span>
+                        </td>
+                        <td class="p-5">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs font-black text-white">4.8</span>
+                                <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-tighter">(8 відгуків)</span>
+                            </div>
+                        </td>
+                        <td class="p-5 text-right">
+                            <button class="text-zinc-600 hover:text-white transition px-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+            <div class="p-5 bg-black/20 flex justify-between items-center border-t border-white/5">
+                <p class="text-[10px] text-zinc-600 uppercase font-black tracking-widest">Показано: 8 майстрів</p>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 bg-white/5 rounded-lg text-[9px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition">Завантажити звіт за минулий місяць</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- КАНДИДАТИ ТА АРХІВ (ПРЕВ'Ю) -->
+        <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="glass-panel p-8 rounded-[2.5rem]">
+                <div class="flex justify-between items-center mb-6">
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest">Недавні кандидати</h4>
+                    <span class="text-[10px] text-rose-500 font-black uppercase">Показова робота</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-white/2 rounded-2xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center font-bold text-[10px]">КБ</div>
+                            <div>
+                                <p class="text-xs font-bold text-zinc-300 leading-none">Катерина Бєлова</p>
+                                <p class="text-[9px] text-zinc-600 mt-1 uppercase font-bold tracking-widest">Візажист • 28.03.2024</p>
+                            </div>
+                        </div>
+                        <button class="text-[9px] font-black text-white uppercase tracking-widest bg-emerald-500/20 px-3 py-1.5 rounded-lg hover:bg-emerald-500 transition">Взяти у штат</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-[2.5rem]">
+                <h4 class="text-xs font-black text-white uppercase tracking-widest mb-6">Останні відгуки на майстрів</h4>
+                <div class="space-y-4">
+                    <div class="p-4 bg-white/2 rounded-2xl border border-white/5">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-xs font-black text-rose-500 uppercase tracking-tighter leading-none">Анна Король</span>
+                            <span class="text-[10px] text-amber-500 font-bold uppercase tracking-widest">5.0 <i class="fa-solid fa-star"></i></span>
+                        </div>
+                        <p class="text-[11px] text-zinc-400 font-medium leading-relaxed">«Найкраще фарбування у моєму житті! Анна справжня чарівниця.» — <span class="text-zinc-500 font-bold uppercase tracking-tighter text-[9px]">Оксана М.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
