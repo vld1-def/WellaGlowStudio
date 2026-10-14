@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Сертифікат (dark) — Wella Nails (без тіні)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@200;300;400&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
+<style>
+  @page { size: 210mm 297mm; margin: 0; }
+  :root{ --g1:#f3dfae; --g2:#caa45d; --g3:#8d6a2c; --ink:#e9e6e0; --muted:#a9a59d; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#0b0b0c}
+  body{display:flex;justify-content:center;align-items:center;min-height:100vh}
+  .cert{position:relative;width:210mm;height:297mm;overflow:hidden;color:var(--ink);
+    font-family:'Jost',sans-serif;background:#0c0c0d;transform-origin:center;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bg{position:absolute;inset:0;background:url('nails.jpg') center 52%/cover no-repeat;
+    filter:grayscale(1) brightness(.95) contrast(1.1)}
+  .shade{position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 50% 46%,rgba(0,0,0,0) 0%,rgba(0,0,0,.35) 70%,rgba(0,0,0,.8) 100%),
+      linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.1) 30%,rgba(0,0,0,.3) 62%,rgba(0,0,0,.85) 100%)}
+  .bokeh{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),rgba(255,255,255,.06) 70%);filter:blur(1.2mm)}
+  .gold{background:linear-gradient(100deg,var(--g3) 0%,var(--g1) 28%,var(--g2) 52%,var(--g1) 74%,var(--g3) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .frame{position:absolute;inset:8mm;border:.3mm solid rgba(202,164,93,.55)}
+  .frame::before{content:"";position:absolute;inset:1.5mm;border:.12mm solid rgba(202,164,93,.3)}
+  .content{position:absolute;inset:8mm;display:flex;flex-direction:column;align-items:center;text-align:center;padding:20mm 16mm 16mm}
+  .logo{display:block;height:29mm;width:auto;margin-top:-2mm}
+  .nm{font-family:"Monsieur La Doulaise",cursive;font-size:12mm;margin-top:2mm;transform:rotate(-4deg)}
+  .title{font-family:'Monsieur La Doulaise',cursive;font-size:calc(34mm + 10px);line-height:1;margin-top:22mm;transform:rotate(-4deg);padding:0 6mm}
+  .sub{margin-top:10mm;font-size:3.6mm;font-weight:300;letter-spacing:1.1mm;text-transform:uppercase;line-height:1.7;color:var(--ink)}
+  .certify{margin-top:26mm;font-size:3.8mm;font-weight:300;letter-spacing:.6mm;color:var(--muted)}
+  .name{margin-top:7mm;width:132mm;border-bottom:.3mm solid var(--g2);min-height:15mm;padding:0 4mm 1.5mm;
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:10.5mm;line-height:1.2;outline:none}
+  .name:empty::before{content:"\00a0"}
+  .text{margin-top:9mm;font-size:3.9mm;font-weight:300;letter-spacing:.35mm;line-height:1.7;color:var(--ink)}
+  .course{margin-top:4mm;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:6.2mm;letter-spacing:.7mm;line-height:1.35;text-transform:uppercase}
+  .footer{margin-top:auto;width:100%;display:flex;justify-content:space-between;align-items:flex-end;padding:0 6mm}
+  .trainer{text-align:left;font-size:3.2mm;font-weight:300;color:var(--muted);letter-spacing:.5mm;line-height:1.6}
+  .trainer b{display:block;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:5.2mm;letter-spacing:.3mm;color:#fff;margin-top:.5mm}
+  .sign{width:44mm;text-align:center}
+  .sign .val{min-height:7mm;font-family:'Cormorant Garamond',serif;font-size:5mm;color:#fff;border-bottom:.25mm solid var(--g2);padding-bottom:.6mm;outline:none}
+  .sign .lbl{margin-top:1.4mm;font-size:2.7mm;letter-spacing:.8mm;text-transform:uppercase;color:var(--muted);font-weight:300}
+  .sign-wrap{display:flex;gap:9mm}
+  @media screen{.cert{box-shadow:0 10px 50px rgba(0,0,0,.7)}}
+  @media print{.cert{transform:none!important} html,body{background:none} body{display:block;min-height:0}}
+</style>
+</head>
+<body>
+<div class="cert">
+  <div class="bg"></div>
+  <span class="bokeh" style="left:30mm;top:42mm;width:21mm;height:21mm"></span>
+  <span class="bokeh" style="right:16mm;top:112mm;width:15mm;height:15mm"></span>
+  <span class="bokeh" style="left:14mm;top:196mm;width:11mm;height:11mm;opacity:.7"></span>
+  <div class="shade"></div>
+  <div class="frame"></div>
+  <div class="content">
+    <img class="logo" src="logo-gold-noshadow.png" alt="Wella Nails">
+    <div class="nm gold">Nail Master</div>
+    <div class="title gold">certificate</div>
+    <div class="sub">підвищення кваліфікації<br>майстра манікюру</div>
+    <div class="certify">підтверджує, що</div>
+    <div class="name" id="name" contenteditable="true" spellcheck="false"></div>
+    <div class="text">успішно закінчила курс</div>
+    <div class="course gold">«Підвищення кваліфікації»</div>
+    <div class="footer">
+      <div class="trainer">викладач курсу:<b id="teacher">wella_nails_if</b></div>
+      <div class="sign-wrap">
+        <div class="sign"><div class="val" id="date" contenteditable="true" spellcheck="false">&nbsp;</div><div class="lbl">Дата</div></div>
+        <div class="sign"><div class="val">&nbsp;</div><div class="lbl">Підпис</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const q=new URLSearchParams(location.search);
+  if(q.get('name')) document.getElementById('name').textContent=q.get('name');
+  if(q.get('date')) document.getElementById('date').textContent=q.get('date');
+  if(q.get('teacher')) document.getElementById('teacher').textContent=q.get('teacher');
+  function fit(){const c=document.querySelector('.cert');if(matchMedia('print').matches)return;
+    const s=Math.min(1,(innerWidth-20)/c.offsetWidth,(innerHeight-20)/c.offsetHeight);
+    c.style.transform='scale('+s+')';document.body.style.height=(c.offsetHeight*s+20)+'px';}
+  addEventListener('resize',fit);addEventListener('load',fit);
+</script>
+</body>
+</html>
